@@ -22,8 +22,8 @@ describe "users api endpoints" do
 
   context "GET /api/v1/users/:id" do
     it "returns a specific user" do
-      cj   = User.create!(name: "C.J. Cregg", id: 111)
-      toby = User.create!(name: "Toby Ziegler", id: 222)
+      cj   = User.create!(name: "C.J. Cregg", id: 111, password: "test", email: "test@example.com")
+      toby = User.create!(name: "Toby Ziegler", id: 222, password: "test", email: "another@example.com")
 
       get "/api/v1/users/#{cj.id}"
 
@@ -40,8 +40,8 @@ describe "users api endpoints" do
 
   context 'PATCH /api/v1/users/:id/' do
     it 'update email for user' do
-      cj   = User.create!(name: "C.J. Cregg", id: 1, email: 'cj@example.com')
-      toby = User.create!(name: "Toby Ziegler", id: 2, email: 'toby@example.com')
+      cj   = User.create!(name: "C.J. Cregg", id: 1, email: 'cj@example.com', password: "test")
+      toby = User.create!(name: "Toby Ziegler", id: 2, email: 'toby@example.com', password: "test")
       old_email = cj.email
       new_email = 'cregg@example.com'
 

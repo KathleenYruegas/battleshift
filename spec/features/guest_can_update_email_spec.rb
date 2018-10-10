@@ -16,7 +16,7 @@ feature 'guest visit user index page' do
 
     visit '/users'
 
-    user = User.create(id: 1, name: 'Josiah Bartlet', email: 'jbarlet@example.com')
+    user = User.create(id: 1, name: 'Josiah Bartlet', email: 'jbarlet@example.com', password: "test")
 
     within("#user-#{user.id}") do
       click_on 'Edit'
