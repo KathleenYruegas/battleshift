@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   end
 
   def create
-
+    redirect_to '/dashboard'
   end
-  
+
   def index
     @search_result = UserPresenter.new
   end
