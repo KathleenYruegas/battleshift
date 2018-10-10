@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
-      redirect_to '/dashboard'
+      redirect_to dashboard_path(id: @user.id)
     else
       render :new
-    end 
+    end
   end
 
   def index
