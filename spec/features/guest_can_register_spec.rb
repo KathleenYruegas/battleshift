@@ -13,10 +13,10 @@ feature 'As a guest user' do
 # And when I fill in an email address (required)
 # And I fill in name (required)
 # And I fill in password and password confirmation (required)
-      fill_in :email, with: "myemail@email.com"
-      fill_in :name, with: "Sample Person"
-      fill_in :password, with: "test"
-      fill_in :password_confirmation, with: "test"
+      fill_in :user_email, with: "myemail@email.com"
+      fill_in :user_name, with: "Sample Person"
+      fill_in :user_password, with: "test"
+      fill_in :user_password_confirmation, with: "test"
 # And I click submit
       click_on "Submit"
 # Then I should be redirected to "/dashboard"
