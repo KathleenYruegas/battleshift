@@ -4,7 +4,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    redirect_to '/dashboard'
+    @user = User.create(user_params)
+    if @user.save
+      redirect_to '/dashboard'
+    else
+      render :new
+    end 
   end
 
   def index
@@ -23,5 +28,11 @@ class UsersController < ApplicationController
     x = UserService.new({id: params[:id]}).update_user_data(params[:email])
     flash.notice = "Successfully updated #{@user.name}."
     redirect_to '/users'
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
