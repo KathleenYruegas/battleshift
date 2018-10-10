@@ -1,6 +1,6 @@
 <% @search_result.all_users.each do |user| %>
-  <div class='user'>
+  <div id="user-<%=user.id%>" class='user'>
     <p class='name'> <%= user.name %> </p>
-    <p class='email'> <%= user.email %> </p>
+    <p class='email'> <%= user.email %> <%= link_to 'Edit', "/users/#{user.id}/edit" %> </p>
   </div>
 <% end %>

@@ -13,6 +13,11 @@ class UserService
     get_json("/api/v1/users")
   end
 
+  def update_user_data(new_email)
+    # refactor by taking params out of URI
+    conn.patch("/api/v1/users/#{filter[:id]}?email=#{new_email}")
+  end
+
   private
 
   def conn

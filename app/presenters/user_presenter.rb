@@ -6,17 +6,15 @@ class UserPresenter
   end
 
   def single_user_object
-    @user ||= UserDisplay.new(user_service.single_user_data)
+     UserDisplay.new(user_service.single_user_data)
   end
 
   def all_users
-    @users ||= user_service.all_user_data.map do |user_data|
+     user_service.all_user_data.map do |user_data|
       UserDisplay.new(user_data)
     end
   end
-
   private
-
   def user_service
     UserService.new(filter)
   end
