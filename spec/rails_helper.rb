@@ -8,7 +8,11 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'vcr'
 require 'webmock/rspec'
+require 'database_cleaner'
 SimpleCov.start "rails"
+DatabaseCleaner.strategy = :truncation
+
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -65,4 +69,22 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before :each do
+    DatabaseCleaner.clean
+  end
+
+  config.after :each do
+    DatabaseCleaner.clean
+  end
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end
