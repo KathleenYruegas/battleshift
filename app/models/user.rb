@@ -4,4 +4,8 @@ class User < ApplicationRecord
   has_secure_password
 
   enum status: ['non-active', 'active']
+
+  def account_activation
+    self.status = 'active'
+  end
 end
