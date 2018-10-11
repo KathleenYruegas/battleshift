@@ -11,7 +11,7 @@ feature 'guest visit user index page' do
       .to_return(body: file2, status: 200)
 
     file3 = File.open("./fixtures/update_user_email.json")
-    stub_request(:patch, "http://localhost:3000/api/v1/users/")
+    stub_request(:patch, "http://localhost:3000/api/v1/users/1?email=josiah@example.com")
       .to_return(body: file3, status: 200)
 
     visit '/users'

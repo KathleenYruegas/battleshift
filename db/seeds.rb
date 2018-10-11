@@ -37,5 +37,5 @@ game_attributes = {
 game = Game.new(game_attributes)
 game.save!
 
-User.create!(name: "Josiah Bartlet", email: "jbarlet@example.com", address: "1600 Pennsylvania Ave NW, Washington, DC 20500")
-
+User.create!(name: "Josiah Bartlet", email: "jbarlet@example.com", address: "1600 Pennsylvania Ave NW, Washington, DC 20500", password: 'test')
+User.create!(name: "Billy Bob", email: "bbob@example.com", address: "1600 Pennsylvania Ave NW, Washington, DC 20500", password: 'test')
