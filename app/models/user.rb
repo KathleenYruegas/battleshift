@@ -1,7 +1,9 @@
 require 'securerandom'
 
 class User < ApplicationRecord
-  validates_presence_of :name, :email, :password
+  validates_presence_of :name, :email
+
+  validates_presence_of :password, :if => :password
 
   has_secure_password
 
