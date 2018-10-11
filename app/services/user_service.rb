@@ -16,6 +16,12 @@ class UserService
   def update_user_data(new_email)
     # refactor by taking params out of URI
     conn.patch("/api/v1/users/#{filter[:id]}?email=#{new_email}")
+    # remove email from URI and use block when making api call do |req|
+    #   req.headers.....
+    #   req.body = { "email": ... }
+    #  end
+    # cf faraday docs
+
   end
 
   private
