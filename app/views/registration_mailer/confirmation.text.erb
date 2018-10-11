@@ -1,2 +1,2 @@
 Visit here to activate your account.
-<%= link_to 'Activate your account', '/confirmation' %>
+<%= link_to 'Activate your account', user_confirmation(@user.activation_token) %>
