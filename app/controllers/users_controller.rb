@@ -23,11 +23,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @search_result = UserPresenter.new({id: params[:id]})
   end
 
   def update
     @user = UserPresenter.new({id: params[:id]}).single_user_object
-    x = UserService.new({id: params[:id]}).update_user_data(params[:email])
+    UserService.new({id: params[:id]}).update_user_data(params[:email])
     flash.notice = "Successfully updated #{@user.name}."
     redirect_to '/users'
   end
