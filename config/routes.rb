@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index, :show, :edit, :update, :create] do
     get '/confirmation', to: 'confirmation#show'
-  end 
+  end
 end

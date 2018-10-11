@@ -19,6 +19,7 @@ Bundler.require(*Rails.groups)
 module BattleshipWeb
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
+    config.action_mailer.default_url_options = { host: 'localhost:3000' }
     config.load_defaults 5.1
     config.before_initialize do |app|
       app.config.paths.add 'app/services/values', :eager_load => true
