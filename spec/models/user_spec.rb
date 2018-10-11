@@ -14,4 +14,15 @@ describe User do
       expect(user.status).to eq('non-active')
     end
   end
+
+  describe 'instance method' do
+    context '#account_activation' do
+      it 'should change their status to active' do
+        user = User.create(name: 'Elena', email: 'elena@example.com', password: 'test')
+        user.account_activation
+
+        expect(user.status).to eq('active')
+      end 
+    end
+  end
 end
