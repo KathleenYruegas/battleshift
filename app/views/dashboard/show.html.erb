@@ -1,3 +1,7 @@
 <h1>Logged in as <%= @user.name %>.</h1>
 
-<p>This account has not yet been activated. Please check your email.</p>
+<% if @user.status == 'active' %>
+  <p>Status: Active</p>
+<% else %>
+  <p>This account has not yet been activated. Please check your email.</p>
+<% end %>
