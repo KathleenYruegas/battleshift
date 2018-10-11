@@ -12,7 +12,6 @@ feature 'guest user can activate their account' do
     click_on 'Submit'
     user = User.last
     visit "users/#{user.activation_token}/confirmation"
-    require "pry"; binding.pry
 
     expect(page).to have_content("Thank you! Your account is now activated.")
     expect(user.status).to eq('active')
@@ -20,6 +19,5 @@ feature 'guest user can activate their account' do
     visit '/dashboard'
     expect(current_path).to eq('/dashboard')
     expect(page).to have_content("Status: Active")
-
   end
 end
