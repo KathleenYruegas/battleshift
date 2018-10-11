@@ -6,10 +6,12 @@ feature 'guest user can activate their account' do
 
     visit '/confirmation'
 
+    expect(page).to have_content("Thank you! Your account is now activated.")
     expect(user.status).to eq('active')
 
     visit '/dashboard'
     expect(current_path).to eq('/dashboard')
     expect(page).to have_content("Status: Active")
+
   end
 end
