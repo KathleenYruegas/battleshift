@@ -12,6 +12,7 @@ class User < ApplicationRecord
   end
 
   def generate_token
-      self.activation_token = SecureRandom.uuid
+    self.activation_token = SecureRandom.uuid
+    self.save!
   end
 end
