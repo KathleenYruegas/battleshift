@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     if @user.save
+      RegistrationMailer.confirmation(@user).deliver_now
       redirect_to dashboard_path(id: @user.id)
     else
       render :new
