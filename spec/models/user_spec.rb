@@ -13,6 +13,11 @@ describe User do
 
       expect(user.status).to eq('non-active')
     end
+    it 'should have an activation token attribute' do
+      user = create(:user)
+
+      expect(user.activation_token)
+    end
   end
 
   describe 'instance method' do
@@ -22,7 +27,7 @@ describe User do
         user.account_activation
 
         expect(user.status).to eq('active')
-      end 
+      end
     end
   end
 end

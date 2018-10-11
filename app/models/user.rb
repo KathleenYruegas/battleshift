@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class User < ApplicationRecord
   validates_presence_of :name, :email, :password
 
@@ -7,5 +9,9 @@ class User < ApplicationRecord
 
   def account_activation
     self.status = 'active'
+  end
+
+  def generate_token
+      self.activation_token = SecureRandom.uuid
   end
 end
