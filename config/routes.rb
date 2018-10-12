@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   get '/dashboard', to: 'dashboard#show'
 
+  resources :confirmation, only: [:edit]
 
   namespace :api do
     namespace :v1 do
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :show, :update]
     end
   end
-  resources :users, only: [:index, :show, :edit, :update, :create] do
-    get '/confirmation', to: 'confirmation#show'
-  end
+
+  resources :users, only: [:index, :show, :edit, :update, :create]
 end
