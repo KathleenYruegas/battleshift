@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class User < ApplicationRecord
-  before_create :generate_token
+  before_create :generate_token, :generate_api_key
   validates_presence_of :name, :email
   validates_presence_of :password, :if => :password
   has_secure_password
@@ -13,5 +13,9 @@ class User < ApplicationRecord
 
   def generate_token
     self.activation_token = SecureRandom.uuid
+  end
+
+  def generate_api_key
+    self.api_key = SecureRandom.uuid
   end
 end

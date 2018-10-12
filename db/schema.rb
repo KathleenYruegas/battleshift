@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181011014921) do
+ActiveRecord::Schema.define(version: 20181012194333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20181011014921) do
     t.string "password_digest"
     t.integer "status", default: 0
     t.string "activation_token"
+    t.string "api_key"
   end
 
 end
