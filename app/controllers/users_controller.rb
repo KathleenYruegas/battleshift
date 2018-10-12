@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.generate_token
       RegistrationMailer.confirmation(@user).deliver_now
       redirect_to dashboard_path(id: @user.id)
     else
