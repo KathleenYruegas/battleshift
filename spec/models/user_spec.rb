@@ -21,10 +21,10 @@ describe User do
   end
 
   describe 'instance method' do
-    context '#account_activation' do
+    context '#activate_account' do
       it 'should change their status to active' do
         user = User.create(name: 'Elena', email: 'elena@example.com', password: 'test')
-        user.account_activation
+        user.activate_account
 
         expect(user.status).to eq('active')
       end

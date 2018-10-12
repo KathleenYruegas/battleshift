@@ -1,4 +1,6 @@
 class ConfirmationController < ApplicationController
-  def show
+  def edit
+    @user = User.find_by_activation_token(params[:id])
+    @user.activate_account
   end
 end
