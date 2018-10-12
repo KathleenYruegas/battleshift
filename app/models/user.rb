@@ -7,8 +7,8 @@ class User < ApplicationRecord
 
   enum status: ['non-active', 'active']
 
-  def account_activation
-    self.status = 'active'
+  def activate_account
+    self.update(status: 'active', activation_token: nil)
   end
 
   def generate_token
