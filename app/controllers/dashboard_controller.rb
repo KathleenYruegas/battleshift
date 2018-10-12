@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:id])
   end
 end

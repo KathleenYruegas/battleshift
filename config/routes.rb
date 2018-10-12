@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new'
   get '/dashboard', to: 'dashboard#show'
 
-  # get '/users/:activation_token/confirmation', to: 'confirmation#show'
+  resources :confirmation, only: [:edit]
 
   namespace :api do
     namespace :v1 do
@@ -15,8 +15,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show, :edit, :update, :create] do
-    get '/:activation_token/confirmation', to: 'confirmation#show'
-  end
-
+  resources :users, only: [:index, :show, :edit, :update, :create]
 end
