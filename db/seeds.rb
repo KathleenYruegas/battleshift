@@ -1,8 +1,12 @@
+
 player_1_board = Board.new(4)
 player_2_board = Board.new(4)
 
 sm_ship = Ship.new(2)
 md_ship = Ship.new(3)
+
+user_1 = User.create!(name: "Josiah Bartlet", email: ENV["BATTLESHIFT_EMAIL"], address: "1600 Pennsylvania Ave NW, Washington, DC 20500", password: 'test', api_key: ENV["BATTLESHIFT_API_KEY"])
+user_2 = User.create!(name: "Billy Bob", email: ENV["BATTLESHIFT_OPPONENT_EMAIL"], address: "1600 Pennsylvania Ave NW, Washington, DC 20500", password: 'test', api_key: ENV["BATTLESHIFT_OPPONENT_API_KEY"])
 
 # Place Player 1 ships
 ShipPlacer.new(board: player_1_board,
