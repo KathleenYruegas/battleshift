@@ -35,11 +35,10 @@ game_attributes = {
   player_2_board: player_2_board,
   player_1_turns: 0,
   player_2_turns: 0,
-  current_turn: "challenger"
+  current_turn: "challenger",
+  player_1: user_1.id,
+  player_2: user_2.id
 }
 
 game = Game.new(game_attributes)
 game.save!
-
-User.create!(name: "Josiah Bartlet", email: "jbarlet@example.com", address: "1600 Pennsylvania Ave NW, Washington, DC 20500", password: 'test')
-User.create!(name: "Billy Bob", email: "bbob@example.com", address: "1600 Pennsylvania Ave NW, Washington, DC 20500", password: 'test')
