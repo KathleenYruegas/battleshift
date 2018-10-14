@@ -5,11 +5,8 @@ class Api::V1::Games::ShipsController < ApplicationController
     player_1_ships = ShipPlacer.new(ship_attributes)
     player_1_ships.run
     # require "pry"; binding.pry
-
-    # player_2_ships = ShipPlacer.new(ship_attributes)
-    # player_2_ships.run
     @game.save
-    render json: @game, message: player_1_ships.message
+    render json: @game, message: player_1_ships.message(params[:ship_size])
   end
 
   private
