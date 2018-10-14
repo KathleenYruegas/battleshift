@@ -35,7 +35,7 @@ game_attributes = {
   player_2_board: player_2_board,
   player_1_turns: 0,
   player_2_turns: 0,
-  current_turn: "challenger",
+  current_turn: 0,
   player_1: user_1.id,
   player_2: user_2.id
 }

@@ -19,7 +19,9 @@ module Api
                             player_1: player_1,
                             player_2: player_2
                           }
+
         game = Game.new(game_attributes)
+        game.current_turn = 'player_1'
         game.save
 
         render json: game
