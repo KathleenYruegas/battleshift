@@ -6,6 +6,10 @@ class ShipPlacer
     @end_space   = end_space
   end
 
+  def message(ship_size)
+    "Successfully placed ship with a size of #{ship_size}. You have 1 ship(s) to place with a size of 2."
+  end
+
   def run
     if same_row?
       place_in_row
@@ -50,6 +54,7 @@ class ShipPlacer
       raise InvalidShipPlacement.new("Attempting to place ship in a space that is already occupied.")
     else
       space.occupy!(ship)
+      message
     end
   end
 end
