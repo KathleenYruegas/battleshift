@@ -54,7 +54,6 @@ class ShipPlacer
       raise InvalidShipPlacement.new("Attempting to place ship in a space that is already occupied.")
     else
       space.occupy!(ship)
-      message
     end
   end
 end
