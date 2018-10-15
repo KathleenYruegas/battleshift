@@ -6,6 +6,7 @@ class Api::V1::Games::ShipsController < ApplicationController
     player_1_ships.run
     # require "pry"; binding.pry
     @game.save
+    require "pry"; binding.pry
     render json: @game, message: player_1_ships.message(params[:ship_size])
   end
 
