@@ -2,10 +2,10 @@ class Api::V1::Games::ShipsController < ApplicationController
   def create
     @game = Game.find(params[:game_id])
 
-    player_1_ships = ShipPlacer.new(ship_attributes_1)
+    player_1_ships = ShipPlacer.new(ship_1_attributes)
     player_1_ships.run
 
-    player_2_ships = ShipPlacer.new(ship_attributes_2)
+    player_2_ships = ShipPlacer.new(ship_2_attributes)
     player_2_ships.run
 
     @game.save
@@ -15,7 +15,7 @@ class Api::V1::Games::ShipsController < ApplicationController
 
   private
 
-  def ship_attributes_1
+  def ship_1_attributes
     { board: @game.player_1_board,
       ship: Ship.new(params[:ship_size]),
       start_space: params[:start_space],
@@ -23,7 +23,7 @@ class Api::V1::Games::ShipsController < ApplicationController
     }
   end
 
-  def ship_attributes_2
+  def ship_2_attributes
     { board: @game.player_2_board,
       ship: Ship.new(params[:ship_size]),
       start_space: params[:start_space],
