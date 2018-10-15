@@ -6,6 +6,14 @@ class ShipPlacer
     @end_space   = end_space
   end
 
+  def message(ship_size)
+    if ship_size == 3
+      "Successfully placed ship with a size of #{ship_size}. You have 1 ship(s) to place with a size of 2."
+    elsif ship_size == 2
+      "Successfully placed ship with a size of #{ship_size}. You have 0 ship(s) to place."
+    end
+  end
+
   def run
     if same_row?
       place_in_row

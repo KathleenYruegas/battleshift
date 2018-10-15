@@ -82,4 +82,18 @@ describe ShipPlacer do
       ShipPlacer.new(board: board, ship: ship, start_space: "A1", end_space: "C1").run
     }.to raise_error(InvalidShipPlacement)
   end
+
+  context '#message' do
+    it 'displays a message after placing a ship of length 3' do
+      ship_size = 3
+
+      expect(subject.message(ship_size)).to eq("Successfully placed ship with a size of #{ship_size}. You have 1 ship(s) to place with a size of 2.")
+    end
+    
+    it 'displays a different message regarding a ship of length 2' do
+      ship_size = 2
+
+      expect(subject.message(ship_size)).to eq("Successfully placed ship with a size of #{ship_size}. You have 0 ship(s) to place.")
+    end
+  end
 end
