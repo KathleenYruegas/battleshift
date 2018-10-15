@@ -26,21 +26,15 @@ class TurnProcessor
     if game.current_turn == 'player_1'
       result = Shooter.fire!(board: game.player_2_board, target: target)
       @messages << "Your shot resulted in a #{result}."
-      # game.player_1_turns += 1
+      game.player_1_turns += 1
       game.update(current_turn: 1)
     elsif game.current_turn == 'player_2'
       result = Shooter.fire!(board: game.player_1_board, target: target)
       @messages << "Your shot resulted in a #{result}."
-      # game.player_2_turns += 1
+      game.player_2_turns += 1
       game.update(current_turn: 0)
     end
   end
-
-  # def ai_attack_back
-  #   result = AiSpaceSelector.new(player.board).fire!
-  #   @messages << "The computer's shot resulted in a #{result}."
-  #   game.player_2_turns += 1
-  # end
 
   def player
     Player.new(game.player_1_board)
