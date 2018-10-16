@@ -1,4 +1,5 @@
 class Shooter
+  attr_reader :target, :board
   def initialize(board:, target:)
     @board     = board
     @target    = target
@@ -6,27 +7,28 @@ class Shooter
   end
 
   def fire!
-    if valid_shot?
+  #   # if valid_shot?
       space.attack!
-    else
-      raise InvalidAttack.new("Invalid coordinates.")
-    end
+  #   # else
+  #   #   raise InvalidAttack.new("Invalid coordinates.")
+  #   # end
   end
 
-  def self.fire!(board:, target:)
-    new(board: board, target: target).fire!
+  # def self.fire!(board:, target:)
+  #   new(board: board, target: target).fire!
+  # end
+
+  def space
+    @space ||= board.locate_space(target)
   end
 
   private
-    attr_reader :board, :target
+    # attr_reader :board, :target
 
-    def space
-      @space ||= board.locate_space(target)
-    end
 
-    def valid_shot?
-      board.space_names.include?(target)
-    end
+    # def valid_shot?
+    #   board.space_names.include?(target)
+    # end
 end
 
 class InvalidAttack < StandardError
