@@ -7,8 +7,10 @@ describe 'GET /api/v1/games/1' do
       player_2_board = Board.new(4)
       sm_ship = Ship.new(2)
       md_ship = Ship.new(3)
-      user_1 = create(:user)
-      user_2 = create(:user)
+      user_1 = create(:user, email: ENV["BATTLESHIFT_EMAIL"])
+      user_2 = create(:user, email: ENV["BATTLESHIFT_OPPONENT_EMAIL"])
+      user_1.api_key = ENV["BATTLESHIFT_API_KEY"]
+      user_1.save
 
       ShipPlacer.new(board: player_1_board,
                      ship: sm_ship,
@@ -114,7 +116,7 @@ describe 'GET /api/v1/games/1' do
 
       # game = Game.new(game_attributes)
       # game.save!
-      headers = { "X_API_Key" => ENV["BATTLESHIFT_API_KEY"] }
+      headers = { "X-API-Key" => ENV["BATTLESHIFT_API_KEY"] }
       post "/api/v1/games", params: {opponent_email: ENV["BATTLESHIFT_OPPONENT_EMAIL"]}, headers: headers
 
       actual  = JSON.parse(response.body, symbolize_names: true)
