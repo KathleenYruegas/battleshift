@@ -7,8 +7,9 @@ module Api
 
           shooting_player = User.find_by_api_key(request.headers["X-API-Key"])
           turn_processor = TurnProcessor.new(game, params[:shot][:target], shooting_player)
+          turn_processor.valid_spot?
 
-          if turn_processor.correct_player?
+          if turn_processor.correct_player? && turn_processor.valid_spot?
             turn_processor.run!
             render json: game, message: turn_processor.message
           else

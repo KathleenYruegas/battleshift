@@ -31,10 +31,26 @@ class TurnProcessor
     end
   end
 
+  def target_exists?
+    @game.player_1_board.board.any? do |row|
+      row.any? do |coord|
+        coord.keys.include?(@target)
+      end
+    end
+  end
+
+  def valid_spot?
+    if target_exists?
+      return true
+    else
+      @messages << "Invalid coordinates"
+      return false
+    end
+  end
+
   private
 
   attr_reader :game, :target, :shooting_player
-
 
   def attack
     if game.current_turn == 'player_1'
