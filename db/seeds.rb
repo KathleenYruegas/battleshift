@@ -36,8 +36,8 @@ game_attributes = {
   player_1_turns: 0,
   player_2_turns: 0,
   current_turn: 0,
-  player_1: user_1.id,
-  player_2: user_2.id
+  player_1_id: user_1.id,
+  player_2_id: user_2.id
 }
 
 game = Game.new(game_attributes)
