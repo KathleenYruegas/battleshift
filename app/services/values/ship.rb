@@ -15,7 +15,7 @@ class Ship
   #   @end_space = end_space
   # end
 
-  def attack!
+  def hit!
     @damage += 1
   end
 
