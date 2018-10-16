@@ -114,9 +114,8 @@ describe 'GET /api/v1/games/1' do
 
       # game = Game.new(game_attributes)
       # game.save!
-      headers = { "HTTP_X_API_Key" => ENV["BATTLESHIFT_API_KEY"] }
-      post "/api/v1/games", params: {opponent_email: ENV["BATTLESHIFT_OPPONENT_EMAIL"]},
-                            headers: headers
+      headers = { "X_API_Key" => ENV["BATTLESHIFT_API_KEY"] }
+      post "/api/v1/games", params: {opponent_email: ENV["BATTLESHIFT_OPPONENT_EMAIL"]}, headers: headers
 
       actual  = JSON.parse(response.body, symbolize_names: true)
       expected = Game.last
