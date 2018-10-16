@@ -8,8 +8,8 @@ class TurnProcessor
 
   def run!
     begin
-      correct_player?
-      attack
+      # correct_player?
+      attack if correct_player?
       game.save!
     rescue InvalidAttack => e
       @messages << e.message
@@ -24,11 +24,9 @@ class TurnProcessor
 
   attr_reader :game, :target
 
-  # def correct_player?
-  #   unless shooting_player.player == @game.current_turn
-  #     @messages << "Invalid move. It's your opponent's turn"
-  #   end
-  # end
+  def correct_player?
+    @messages << "Invalid move. It's your opponent's turn"
+  end
 
   def attack
     if game.current_turn == 'player_1'
