@@ -54,27 +54,18 @@ class TurnProcessor
 
   def attack
     if game.current_turn == 'player_1'
-      player_1_shot
+      player_shot(game.player_2_board)
       game.player_1_turns += 1
       game.update(current_turn: 1)
     elsif game.current_turn == 'player_2'
-      player_2_shot
+      player_shot(game.player_1_board)
       game.player_2_turns += 1
       game.update(current_turn: 0)
     end
   end
 
-  def player_1_shot
-    shooter = Shooter.new(board: game.player_2_board, target: target)
-    result = shooter.fire!
-    @messages << "Your shot resulted in a #{result}."
-    if result == 'Hit'
-      @messages << "Battleship sunk." if shooter.space.contents.is_sunk?
-    end
-  end
-
-  def player_2_shot
-    shooter = Shooter.new(board: game.player_1_board, target: target)
+  def player_shot(board)
+    shooter = Shooter.new(board: board, target: target)
     result = shooter.fire!
     @messages << "Your shot resulted in a #{result}."
     if result == 'Hit'

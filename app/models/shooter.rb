@@ -22,7 +22,7 @@ class Shooter
     @space ||= board.locate_space(target)
   end
 
-  private
+  # private
     # attr_reader :board, :target
 
 
@@ -31,8 +31,8 @@ class Shooter
     # end
 end
 
-class InvalidAttack < StandardError
-  def initialize(msg = "Invalid attack.")
-    super(msg)
-  end
-end
+# class InvalidAttack < StandardError
+#   def initialize(msg = "Invalid attack.")
+#     super(msg)
+#   end
+# end
