@@ -1,7 +1,4 @@
-module Api
-  module V1
-    module Games
-      class ShotsController < ApiController
+      class Api::V1::Games::ShotsController < ApiController
         def create
           game = Game.find(params[:game_id])
 
@@ -16,6 +13,3 @@ module Api
           end
         end
       end
-    end
-  end
-end
