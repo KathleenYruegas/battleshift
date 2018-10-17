@@ -49,6 +49,15 @@ class TurnProcessor
     end
   end
 
+  def no_winner?
+    if game.winner == nil
+      return true
+    else
+      @messages << "Invalid move. Game over."
+      return false
+    end
+  end
+
   private
 
   attr_reader :game, :target, :shooting_player
