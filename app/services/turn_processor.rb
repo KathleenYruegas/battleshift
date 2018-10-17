@@ -9,7 +9,6 @@ class TurnProcessor
   def run!
     begin
       attack
-      # check_for_winner
       game.save!
     rescue InvalidAttack => e
       @messages << e.message
