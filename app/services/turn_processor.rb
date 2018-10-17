@@ -92,11 +92,11 @@ class TurnProcessor
     if game.player_1s_sunken_ships == 2
       @messages << "Game over."
       game.winner = game.player_2.email
-      # game.save
+      game.save
     elsif game.player_2s_sunken_ships == 2
       @messages << "Game over."
       game.winner = game.player_1.email
-      # game.save
+      game.save
     end
   end
 
