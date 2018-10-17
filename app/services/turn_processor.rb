@@ -70,8 +70,22 @@ class TurnProcessor
     @messages << "Your shot resulted in a #{result}."
     if result == 'Hit'
       @messages << "Battleship sunk." if shooter.space.contents.is_sunk?
+      # sunken_ships
     end
   end
+
+  # def sunken_ships
+  #   if game.current_turn == 'player_1'
+  #     @sunken_ships_by_player_1 += 1
+  #   elsif game.current_turn == 'player_2'
+  #     @sunken_ships_by_player_2 += 1
+  #   end
+  #   if (@sunken_ships_by_player_1 == 2) || (@sunken_ships_by_player_2 == 2)
+  #     require "pry"; binding.pry
+  #     @messages << "Game over."
+  #     # add email to db of winner
+  #   end
+  # end
 
   # def player
   #   Player.new(game.player_1_board)
