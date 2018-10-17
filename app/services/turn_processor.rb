@@ -9,6 +9,7 @@ class TurnProcessor
   def run!
     begin
       attack
+      # check_for_winner
       game.save!
     rescue InvalidAttack => e
       @messages << e.message
@@ -69,7 +70,33 @@ class TurnProcessor
     result = shooter.fire!
     @messages << "Your shot resulted in a #{result}."
     if result == 'Hit'
-      @messages << "Battleship sunk." if shooter.space.contents.is_sunk?
+      if shooter.space.contents.is_sunk?
+        @messages << "Battleship sunk."
+        sunken_ships
+      end
+    end
+  end
+
+  def sunken_ships
+    if game.current_turn == 'player_1'
+      game.player_2s_sunken_ships += 1
+      # game.save
+    elsif game.current_turn == 'player_2'
+      game.player_1s_sunken_ships += 1
+      # game.save
+    end
+    check_for_winner
+  end
+
+  def check_for_winner
+    if game.player_1s_sunken_ships == 2
+      @messages << "Game over."
+      game.winner = game.player_2.email
+      game.save
+    elsif game.player_2s_sunken_ships == 2
+      @messages << "Game over."
+      game.winner = game.player_1.email
+      game.save
     end
   end
 

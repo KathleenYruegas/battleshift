@@ -7,7 +7,7 @@ class Api::V1::Games::ShotsController < ApiController
 
     if turn_processor.correct_player? && turn_processor.valid_spot?
       turn_processor.run!
-      render json: game, message: turn_processor.message
+      test = render json: game, message: turn_processor.message
     else
       render json: game, status: 400, message: turn_processor.message
     end

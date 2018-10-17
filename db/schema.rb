@@ -18,10 +18,12 @@ ActiveRecord::Schema.define(version: 20181015213353) do
   create_table "games", force: :cascade do |t|
     t.text "player_1_board"
     t.text "player_2_board"
-    t.integer "winner"
+    t.string "winner"
     t.integer "player_1_turns", default: 0
     t.integer "player_2_turns", default: 0
     t.integer "current_turn", default: 0
+    t.integer "player_1s_sunken_ships", default: 0
+    t.integer "player_2s_sunken_ships", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "player_1_id"
