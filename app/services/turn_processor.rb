@@ -88,10 +88,8 @@ class TurnProcessor
   def sunken_ships
     if game.current_turn == 'player_1'
       game.player_2s_sunken_ships += 1
-      # game.save
     elsif game.current_turn == 'player_2'
       game.player_1s_sunken_ships += 1
-      # game.save
     end
     check_for_winner
   end
@@ -107,13 +105,4 @@ class TurnProcessor
       game.save
     end
   end
-
-  # def player
-  #   Player.new(game.player_1_board)
-  # end
-  #
-  # def opponent
-  #   Player.new(game.player_2_board)
-  # end
-
 end
