@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Ship do
   length = 2
-  subject { Ship.new(length)}
+  subject { Ship.new(length) }
 
   it 'exists' do
     expect(subject).to be_a Ship
