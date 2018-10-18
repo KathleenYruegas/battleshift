@@ -9,7 +9,6 @@ describe "Api::V1::Shots" do
 
     it "updates the message and board with a hit" do
       user_1.update(api_key: "1234")
-      user_2.update(api_key: "5678")
       ShipPlacer.new(board: game_1.player_2_board,
                      ship: sm_ship,
                      start_space: "A1",
@@ -33,18 +32,18 @@ describe "Api::V1::Shots" do
     end
 
     it "updates the message and board with a miss" do
-      allow_any_instance_of(Shooter).to receive(:fire!).and_return("Miss")
+      user_1.update(api_key: "1234")
 
-      headers = { "CONTENT_TYPE" => "application/json" }
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
       json_payload = {target: "A1"}.to_json
 
-      post "/api/v1/games/#{game.id}/shots", params: json_payload, headers: headers
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
 
-      expect(response).to be_success
+      expect(response).to be_successful
 
       game = JSON.parse(response.body, symbolize_names: true)
 
-      expected_messages = "Your shot resulted in a Miss. The computer's shot resulted in a Miss."
+      expected_messages = "Your shot resulted in a Miss."
       player_2_targeted_space = game[:player_2_board][:rows].first[:data].first[:status]
 
 
