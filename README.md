@@ -30,3 +30,6 @@ Notable Technology:
 How to run the test suite
 * Navigate to the root of the directory and type in `rspec`. 
 
+The Team
+1. Claire Beauvais `github.com/clairebvs`
+2. Kathleen Yruegas `github.com/kathleenyruegas`
