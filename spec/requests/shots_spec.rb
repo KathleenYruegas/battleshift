@@ -78,5 +78,32 @@ describe "Api::V1::Shots" do
       expect(response.status).to eq(400)
       expect(game[:message]).to eq "Invalid move. It's your opponent's turn"
     end
+
+    it 'updates message when ship is sunk' do
+      user_1.update(api_key: "1234")
+      user_2.update(api_key: "5678")
+
+      ShipPlacer.new(board: game_1.player_2_board,
+                     ship: sm_ship,
+                     start_space: "A1",
+                     end_space: "A2").run
+      game_1.save
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
+      json_payload = {target: "A2"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      game = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(200)
+      expect(game[:message]).to eq "Your shot resulted in a Hit. Battleship sunk."
+    end
   end
 end
