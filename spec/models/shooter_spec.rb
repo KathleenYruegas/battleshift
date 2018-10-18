@@ -13,6 +13,7 @@ describe Shooter do
     context '#fire!' do
       it 'returns a string as Hit or Miss' do
         expect(subject.fire!).to be_a(String)
+        expect(subject.fire!).to eq('Miss')
       end
     end
   end
