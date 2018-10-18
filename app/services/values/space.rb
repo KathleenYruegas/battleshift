@@ -24,6 +24,8 @@ class Space
     !!@contents
   end
 
+  private
+
   def not_attacked?
     status == "Not Attacked"
   end

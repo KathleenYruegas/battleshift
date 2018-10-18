@@ -9,7 +9,6 @@ class TurnProcessor
   def run!
     begin
       attack
-      # check_for_winner
       game.save!
     rescue InvalidAttack => e
       @messages << e.message
@@ -49,6 +48,15 @@ class TurnProcessor
     end
   end
 
+  def no_winner?
+    if game.winner == nil
+      return true
+    else
+      @messages << "Invalid move. Game over."
+      return false
+    end
+  end
+
   private
 
   attr_reader :game, :target, :shooting_player
@@ -80,10 +88,8 @@ class TurnProcessor
   def sunken_ships
     if game.current_turn == 'player_1'
       game.player_2s_sunken_ships += 1
-      # game.save
     elsif game.current_turn == 'player_2'
       game.player_1s_sunken_ships += 1
-      # game.save
     end
     check_for_winner
   end
@@ -99,13 +105,4 @@ class TurnProcessor
       game.save
     end
   end
-
-  # def player
-  #   Player.new(game.player_1_board)
-  # end
-  #
-  # def opponent
-  #   Player.new(game.player_2_board)
-  # end
-
 end
