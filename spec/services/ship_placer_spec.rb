@@ -1,7 +1,7 @@
 require 'spec_helper'
 require './app/services/ship_placer'
-require './app/services/values/board'
-require './app/services/values/space'
+require './app/models/board'
+require './app/models/space'
 
 describe ShipPlacer do
   let(:board) { Board.new(4) }
@@ -89,7 +89,7 @@ describe ShipPlacer do
 
       expect(subject.message(ship_size)).to eq("Successfully placed ship with a size of #{ship_size}. You have 1 ship(s) to place with a size of 2.")
     end
-    
+
     it 'displays a different message regarding a ship of length 2' do
       ship_size = 2
 
