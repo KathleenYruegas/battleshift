@@ -10,7 +10,6 @@ describe "Api::V1::Shots" do
     it "updates the message and board with a hit" do
       user_1.update(api_key: "1234")
       user_2.update(api_key: "5678")
-      # allow_any_instance_of(Shooter).to receive(:fire!).and_return("Hit")
       ShipPlacer.new(board: game_1.player_2_board,
                      ship: sm_ship,
                      start_space: "A1",
