@@ -51,7 +51,7 @@ class Board
   end
 
   private
-  
+
   def get_spaces_between(coordinate1, coordinate2)
     return get_row_spaces_between(coordinate1, coordinate2) if same_row?(coordinate1, coordinate2)
     return get_column_spaces_between(coordinate1, coordinate2) if same_column?(coordinate1, coordinate2)
