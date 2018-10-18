@@ -175,6 +175,14 @@ describe "Api::V1::Shots" do
       game = JSON.parse(response.body, symbolize_names: true)
       expect(response.status).to eq(200)
       expect(game[:message]).to eq "Your shot resulted in a Hit. Battleship sunk. Game over."
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "B4"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      game = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(400)
+      expect(game[:message]).to eq "Invalid move. Game over."
     end
   end
 end
