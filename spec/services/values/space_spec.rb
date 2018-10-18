@@ -15,5 +15,11 @@ describe Space do
         expect(subject.attack!).to eq('Miss')
       end
     end
+    context '#occupy!(ship)' do
+      it 'changes contents from nil to ship object' do
+        ship = Ship.new(2)
+        expect(subject.occupy!(ship)).to be_a(Ship)
+      end
+    end
   end
 end
