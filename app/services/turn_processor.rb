@@ -6,6 +6,10 @@ class TurnProcessor
     @shooting_player = shooting_player
   end
 
+  def valid_turn?
+    correct_player? && valid_spot? && no_winner?
+  end
+
   def run!
     begin
       attack

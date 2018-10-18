@@ -6,7 +6,7 @@ class Api::V1::Games::ShotsController < ApiController
 
     if shooting_player && (shooting_player == game.player_1 || shooting_player == game.player_2)
       turn_processor = TurnProcessor.new(game, params[:shot][:target], shooting_player)
-      if turn_processor.correct_player? && turn_processor.valid_spot? && turn_processor.no_winner?
+      if turn_processor.valid_turn?
         turn_processor.run!
         render json: game, message: turn_processor.message
       else
