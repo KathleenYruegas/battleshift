@@ -50,6 +50,8 @@ class Board
     end
   end
 
+  private
+  
   def get_spaces_between(coordinate1, coordinate2)
     return get_row_spaces_between(coordinate1, coordinate2) if same_row?(coordinate1, coordinate2)
     return get_column_spaces_between(coordinate1, coordinate2) if same_column?(coordinate1, coordinate2)
@@ -179,6 +181,7 @@ class Board
   def contains_hit?(coordinate)
     space_attacked?(coordinate) && space_occupied?(coordinate)
   end
+
 
   def contains_miss?(coordinate)
     space_attacked?(coordinate) && !space_occupied?(coordinate)
