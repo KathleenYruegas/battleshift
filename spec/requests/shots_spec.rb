@@ -115,6 +115,11 @@ describe "Api::V1::Shots" do
                      ship: sm_ship,
                      start_space: "A1",
                      end_space: "A2").run
+
+    ShipPlacer.new(board: game_1.player_1_board,
+                   ship: sm_ship,
+                   start_space: "B1",
+                   end_space: "B2").run
       game_1.save
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
@@ -122,11 +127,19 @@ describe "Api::V1::Shots" do
       post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
-      json_payload = {target: "A1"}.to_json
+      json_payload = {target: "B1"}.to_json
       post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
       json_payload = {target: "A2"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      game = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(200)
+      expect(game[:message]).to eq "Your shot resulted in a Hit. Battleship sunk."
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "B2"}.to_json
       post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
 
       game = JSON.parse(response.body, symbolize_names: true)
@@ -196,6 +209,68 @@ describe "Api::V1::Shots" do
       game = JSON.parse(response.body, symbolize_names: true)
       expect(response.status).to eq(400)
       expect(game[:message]).to eq "Invalid move. Game over."
+      expect(game[:winner]).to eq(user_1.email)
+    end
+
+    it 'player_2 can also win' do
+      user_1.update(api_key: "1234")
+      user_2.update(api_key: "5678")
+
+      ShipPlacer.new(board: game_1.player_1_board,
+                     ship: sm_ship,
+                     start_space: "A1",
+                     end_space: "A2").run
+
+     ShipPlacer.new(board: game_1.player_1_board,
+                    ship: md_ship,
+                    start_space: "B1",
+                    end_space: "D1").run
+      game_1.save
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
+      json_payload = {target: "A4"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
+      json_payload = {target: "A2"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "A2"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
+      json_payload = {target: "B1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "B1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
+      json_payload = {target: "C1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "D1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
+      json_payload = {target: "D1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "C1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      game = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(200)
+      expect(game[:message]).to eq "Your shot resulted in a Hit. Battleship sunk. Game over."
+      expect(game[:winner]).to eq(user_2.email)
     end
   end
 end
