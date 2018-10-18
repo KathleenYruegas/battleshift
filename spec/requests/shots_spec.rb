@@ -8,6 +8,20 @@ describe "Api::V1::Shots" do
     let(:md_ship) { Ship.new(3) }
     let(:game_1) {create(:game, player_1_id: user_1.id, player_2_id: user_2.id)}
 
+    it 'prevents a player from playing a game they are not a part of' do
+      user_3 = create(:user)
+      user_3.update(api_key: "5566")
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5566" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      error = JSON.parse(response.body, symbolize_names: true)
+      expected_messages = "Unauthorized"
+      expect(response.status).to eq(401)
+      expect(error[:message]).to eq expected_messages
+    end
+
     it "updates the message and board with a hit" do
       user_1.update(api_key: "1234")
 
