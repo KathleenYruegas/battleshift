@@ -80,6 +80,7 @@ describe "Api::V1::Shots" do
 
     it 'updates message when its not that players turn' do
       user_1.update(api_key: "1234")
+      user_2.update(api_key: "5678")
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
       json_payload = {target: "A1"}.to_json
@@ -87,6 +88,18 @@ describe "Api::V1::Shots" do
 
       headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "1234" }
       json_payload = {target: "A2"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      game = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(400)
+      expect(game[:message]).to eq "Invalid move. It's your opponent's turn"
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "A1"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "A1"}.to_json
       post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
 
       game = JSON.parse(response.body, symbolize_names: true)
@@ -175,6 +188,14 @@ describe "Api::V1::Shots" do
       game = JSON.parse(response.body, symbolize_names: true)
       expect(response.status).to eq(200)
       expect(game[:message]).to eq "Your shot resulted in a Hit. Battleship sunk. Game over."
+
+      headers = { "CONTENT_TYPE" => "application/json", "X-API-Key" => "5678" }
+      json_payload = {target: "B4"}.to_json
+      post "/api/v1/games/#{game_1.id}/shots", params: json_payload, headers: headers
+
+      game = JSON.parse(response.body, symbolize_names: true)
+      expect(response.status).to eq(400)
+      expect(game[:message]).to eq "Invalid move. Game over."
     end
   end
 end
