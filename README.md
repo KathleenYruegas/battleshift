@@ -11,7 +11,7 @@ The many goals of this project included:
 
 Interested in cloning this app? Follow these instructions on your local:
 ```
-1. git clone 
+1. git clone git@github.com:KathleenYruegas/battleshift.git
 2. bundle install
 3. rake db:{create,migrate,seed}
   ```
