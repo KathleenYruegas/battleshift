@@ -1,6 +1,9 @@
 # README
 
-This project was a paired project to be completed over 12 days.  We inherited an existing code base (Brownfield) along with a spec harness to support our progress. The app is a Battleship game played via API calls.
+This project was a paired project to be completed over 12 days.  We inherited an existing code base (Brownfield) along with a spec harness to support our progress. The app is a Battleship game played via API calls.  
+
+#### Areas of Focus
+This project was aimed at learning how to correct and balance tech debt with meeting deadlines. The inherited code was not the greatest and we had to navigate around it to add features, complete the game, and build API endpoints.
 
 The many goals of this project included:
 * Build out the internal API to support calls.
